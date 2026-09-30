@@ -1,0 +1,18 @@
+<div class="container py-5">
+  <h1 class="text-center mb-4">Ofertas y Promociones</h1>
+  <div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let o of ofertas">
+      <div class="card h-100 border-0 shadow-sm oferta-card">
+        <div class="card-body text-center p-4">
+          <span class="badge bg-danger fs-4 mb-3">-{{ o.descuento }}%</span>
+          <h4>{{ o.titulo }}</h4>
+          <p class="text-muted">{{ o.descripcion }}</p>
+          <p class="small text-secondary">
+            <i class="bi bi-calendar-event"></i> Válido hasta: {{ o.validoHasta }}
+          </p>
+          <button class="btn btn-danger">Aprovechar oferta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

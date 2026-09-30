@@ -1,0 +1,57 @@
+<div class="container py-5">
+  <h1 class="text-center mb-4">Reseñas de Clientes</h1>
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-body p-4">
+      <h4 class="mb-3">Deja tu reseña</h4>
+      <form #f="ngForm" (ngSubmit)="enviar(f)">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="cliente">Cliente</label>
+            <input id="cliente" class="form-control" name="cliente" [(ngModel)]="nueva.cliente" required
+              minlength="3">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="productoReseña">Producto</label>
+            <input id="productoReseña" class="form-control" name="producto" [(ngModel)]="nueva.producto" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="comentario">Comentario</label>
+            <textarea id="comentario" class="form-control" name="comentario" rows="3"
+              [(ngModel)]="nueva.comentario" required></textarea>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="estrellas">Estrellas (1-5)</label>
+            <input id="estrellas" type="number" min="1" max="5" class="form-control" name="estrellas"
+              [(ngModel)]="nueva.estrellas" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="f.invalid">
+          <i class="bi bi-send"></i> Publicar reseña
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-12 col-md-6" *ngFor="let r of resenas()">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-1">{{ r.cliente }}</h5>
+            <span class="text-warning">
+              <i *ngFor="let s of estrellasArr" class="bi" [class.bi-star-fill]="s <= r.estrellas"
+                [class.bi-star]="s > r.estrellas"></i>
+            </span>
+          </div>
+          <small class="text-muted">{{ r.producto }} · {{ r.fecha }}</small>
+          <p class="mt-2 mb-0">{{ r.comentario }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="resenas().length === 0">
+      <div class="alert alert-info">Aún no hay reseñas.</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<section class="hero text-white d-flex align-items-center">
+  <div class="container text-center py-5">
+    <h1 class="display-3 fw-bold">Bienvenido a <span class="text-warning">TecnoMax</span></h1>
+    <p class="lead mb-4">La mejor tecnología al mejor precio</p>
+    <a routerLink="/productos" class="btn btn-warning btn-lg px-4">
+      <i class="bi bi-shop"></i> Ver Productos
+    </a>
+  </div>
+</section>
+
+<section class="container py-5">
+  <h2 class="text-center mb-4">Productos Destacados</h2>
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let p of destacados">
+      <div class="card h-100 shadow-sm border-0 card-hover">
+        <img [src]="p.imagen" class="card-img-top" [alt]="p.nombre" style="height: 200px; object-fit: cover">
+        <div class="card-body">
+          <span class="badge bg-primary mb-2">{{ p.categoria }}</span>
+          <h5 class="card-title">{{ p.nombre }}</h5>
+          <p class="text-success fw-bold fs-5 mb-0">S/ {{ p.precio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Categorías</h2>
+    <div class="row g-4">
+      <div class="col-6 col-md-3" *ngFor="let c of categorias">
+        <div class="card text-center h-100 border-0 shadow-sm card-hover">
+          <div class="card-body">
+            <i class="bi {{ c.icono }} display-4 text-primary"></i>
+            <h5 class="mt-3">{{ c.nombre }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5" *ngIf="ofertas.length > 0">
+  <div class="alert alert-warning d-flex align-items-center shadow-sm">
+    <i class="bi bi-megaphone-fill fs-3 me-3"></i>
+    <div>
+      <strong>{{ ofertas[0].titulo }}</strong> — {{ ofertas[0].descuento }}% de descuento.
+      {{ ofertas[0].descripcion }}
+    </div>
+  </div>
+</section>

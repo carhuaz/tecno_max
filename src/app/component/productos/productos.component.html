@@ -1,0 +1,36 @@
+<div class="container py-5">
+  <h1 class="mb-4 text-center">Nuestros Productos</h1>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-6">
+      <label class="form-label fw-semibold" for="filtroCategoria">Filtrar por categoría</label>
+      <select id="filtroCategoria" name="filtro" class="form-select"
+        [ngModel]="filtro()" (ngModelChange)="filtro.set($event)">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let c of categorias" [value]="c.nombre">{{ c.nombre }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let p of productosFiltrados()">
+      <div class="card h-100 shadow-sm border-0 card-hover">
+        <img [src]="p.imagen" class="card-img-top" [alt]="p.nombre" (error)="onImageError($event)"
+          style="height: 200px; object-fit: cover">
+        <div class="card-body d-flex flex-column">
+          <span class="badge bg-primary mb-2 align-self-start">{{ p.categoria }}</span>
+          <h5 class="card-title">{{ p.nombre }}</h5>
+          <p class="card-text text-muted small flex-grow-1">{{ p.descripcion }}</p>
+          <p class="text-success fw-bold fs-4 mb-2">S/ {{ p.precio }}</p>
+          <button class="btn btn-outline-primary w-100">
+            <i class="bi bi-cart-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="productosFiltrados().length === 0">
+      <div class="alert alert-info text-center">No hay productos en esta categoría.</div>
+    </div>
+  </div>
+</div>
